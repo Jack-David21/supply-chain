@@ -2,7 +2,6 @@
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.109.2-009688.svg)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.31.0-FF4B4B.svg)
 ![XGBoost](https://img.shields.io/badge/XGBoost-2.0.3-red.svg)
 
 **A Machine Learning Dashboard for Factory Floor Data**
@@ -19,7 +18,7 @@ Instead of waiting for a machine to break, this system acts as an early warning 
 *   **Smart Predictions:** Uses an XGBoost machine learning model trained on real factory data to predict machine breakdowns.
 *   **Secure Logins:** Separate accounts for everyday operators and system administrators.
 *   **Easy-to-Use Dashboard:** A web interface where users can enter sensor readings and instantly see if the machine is healthy or at risk.
-*   **Two-Part System:** A secure backend server (FastAPI) handles the heavy math, while the frontend (Streamlit) handles the user display.
+*   **Two-Part System:** A secure backend server (FastAPI) handles the heavy math, while the frontend handles the user display.
 *   **Activity Tracking (Audit Logs):** Keeps a permanent record of who checked a machine, what time they checked it, and what the prediction was. 
 *   **Built-in Help Center:** Includes a documentation page explaining what each sensor does so new workers can understand the system.
 

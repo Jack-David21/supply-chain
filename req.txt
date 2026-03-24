@@ -8,6 +8,6 @@ xgboost==2.0.3
 fastapi==0.109.2       
 uvicorn==0.27.1        
 pydantic==2.6.1        
+python-multipart==0.0.9
 
-# --- Frontend Dashboard ---
-streamlit==1.31.0
+# (Streamlit removed)aiofiles==23.2.1

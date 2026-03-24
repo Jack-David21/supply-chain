@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Maintenance System</title>
+    <!-- Use Bootstrap or customized CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; }
+        .hidden { display: none; }
+        .card { box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 10px; margin-bottom: 20px; }
+        .sidebar { background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .navbar-brand { font-weight: bold; }
+        
+        /* Floating Info Button */
+        .fab-info {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #0d6efd;
+            color: white;
+            font-size: 28px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .fab-info:hover {
+            background-color: #0b5ed7;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Login Section -->
+<div id="login-section" class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card p-4">
+                <h3 class="text-center mb-3">🔐 Company Login</h3>
+                <form id="login-form">
+                    <div class="mb-3">
+                        <label>Username</label>
+                        <input type="text" id="username" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Password</label>
+                        <input type="password" id="password" class="form-control" required>
+                    </div>
+                    <div id="login-error" class="alert alert-danger hidden"></div>
+                    <button type="submit" class="btn btn-primary w-100">Log In</button>
+                    <hr>
+                    <p class="text-muted text-center small">Demo users: admin (admin123), operator1 (op1pass)</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main App Section -->
+<div id="app-section" class="hidden">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">⚙️ Predictive Maintenance Early-Warning System</a>
+            <div class="d-flex text-white me-3 align-items-center">
+                <span id="user-display" class="me-3"></span>
+                <button class="btn btn-sm btn-outline-light" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid px-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="sidebar position-sticky" style="top: 20px;">
+                    <h5>🧭 Navigation</h5>
+                    <ul class="nav flex-column nav-pills mb-4">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" onclick="switchTab('dashboard')">🏠 Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="switchTab('audit')">📒 Audit Log</a>
+                        </li>
+                    </ul>
+
+                    <!-- Inputs Sidebar for Dashboard -->
+                    <div id="inputs-sidebar">
+                        <h5>🔧 Equipment & Readings</h5>
+                        <hr>
+                        <form id="predict-form">
+                            <div class="mb-2">
+                                <label>Equipment Type</label>
+                                <select id="comp-type" class="form-select form-select-sm">
+                                    <option>Machine</option><option>Sensor</option><option>Cutting Tool</option>
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label>ID</label>
+                                <input type="text" id="comp-id" class="form-control form-control-sm" value="CNC-001">
+                            </div>
+                            <div class="mb-2">
+                                <label>Product Quality</label>
+                                <select id="quality" class="form-select form-select-sm">
+                                    <option value="0">Low</option><option value="1" selected>Medium</option><option value="2">High</option>
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label>Room Temp (°K)</label>
+                                <input type="number" id="air-temp" class="form-control form-control-sm" value="300.0" step="0.1">
+                            </div>
+                            <div class="mb-2">
+                                <label>Machine Temp (°K)</label>
+                                <input type="number" id="process-temp" class="form-control form-control-sm" value="310.0" step="0.1">
+                            </div>
+                            <div class="mb-2">
+                                <label>Spin Speed (RPM)</label>
+                                <input type="number" id="speed" class="form-control form-control-sm" value="1500">
+                            </div>
+                            <div class="mb-2">
+                                <label>Twisting Force (Nm)</label>
+                                <input type="number" id="torque" class="form-control form-control-sm" value="40.0" step="0.1">
+                            </div>
+                            <div class="mb-3">
+                                <label>Tool Usage (min)</label>
+                                <input type="number" id="tool-wear" class="form-control form-control-sm" value="100">
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">🚀 Run Check</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <!-- Dashboard Tab -->
+                <div id="tab-dashboard" class="tab-content">
+                    <h4>Dashboard</h4>
+                    <p>Select the equipment, enter the readings in the sidebar, and press <b>Run Check</b>.</p>
+                    <div id="results-area" class="card p-4 hidden">
+                        <h5 class="mb-3">📊 Check Results</h5>
+                        <div class="row text-center mb-3">
+                            <div class="col-4"><h3 id="res-status" class="fw-bold"></h3><small>Result</small></div>
+                            <div class="col-4"><h3 id="res-prob"></h3><small>Chance of Breakdown</small></div>
+                            <div class="col-4"><h3 id="res-eq"></h3><small>Equipment</small></div>
+                        </div>
+                        <div id="res-alert" class="alert mt-3"></div>
+                    </div>
+                </div>
+
+                <!-- Info Tab -->
+                <div id="tab-info" class="tab-content hidden">
+                    <div class="card p-4 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="m-0">ℹ️ Equipment & System Guide</h3>
+                            <button class="btn btn-outline-secondary btn-sm" onclick="switchTab('dashboard')">Back to Dashboard</button>
+                        </div>
+                        <p class="lead">Welcome to the Predictive Maintenance guide. This page explains the machines we monitor, what the sensors do, and what signs of trouble the system looks for. It's designed to be easy to understand for operators, engineers, and management alike.</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="card p-4 h-100">
+                                <h4>🏭 The Machine</h4>
+                                <p>We use a <strong>CNC milling machine</strong> — a highly precise, computer-controlled cutting machine on the factory floor.</p>
+                                <p>Every time it runs, we record the conditions around it and how it's performing. The machine makes parts in three quality levels:</p>
+                                <ul>
+                                    <li><strong>Low (L)</strong>: Basic, everyday parts. Faster making, less force (~60% of runs).</li>
+                                    <li><strong>Medium (M)</strong>: Standard parts. Balanced speed and force (~30% of runs).</li>
+                                    <li><strong>High (H)</strong>: Precision parts. Slower, stronger cuts for parts that need extra care (~10% of runs).</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <div class="card p-4 h-100">
+                                <h4>⚠️ What Can Go Wrong</h4>
+                                <p>Our system acts as an early-warning radar. It checks for five different types of breakdowns at once to warn you before they happen:</p>
+                                <ul>
+                                    <li><strong>Tool Wear</strong>: The cutting tool has been used too long and is too dull to cut safely.</li>
+                                    <li><strong>Overheating</strong>: The machine can't cool down fast enough and temperature spikes.</li>
+                                    <li><strong>Power Failure</strong>: The machine is spinning and pushing harder than is mechanically safe.</li>
+                                    <li><strong>Overstrain</strong>: A worn-out tool combined with high force pushes the machine past its physical limits.</li>
+                                    <li><strong>Random</strong>: Rare, unpredictable problems that happen occasionally.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4">
+                        <h4>📡 The Sensors Explained</h4>
+                        <p>We rely on five main sensors to tell us how the machine is feeling. Here's how to read them:</p>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Sensor</th>
+                                        <th>What it measures</th>
+                                        <th>Normal Range</th>
+                                        <th>Why it matters</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>🌡️ Room Temperature</strong><br><small>Unit: Kelvin (°K)</small></td>
+                                        <td>How warm or cool the air is around the machine.</td>
+                                        <td>295 – 305 °K</td>
+                                        <td>If the room is too hot, the machine can overheat and break down faster.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>🔥 Machine Temperature</strong><br><small>Unit: Kelvin (°K)</small></td>
+                                        <td>How hot the machine itself gets while working.</td>
+                                        <td>306 – 314 °K</td>
+                                        <td>When it gets too hot inside, it means things are rubbing too hard—a clear sign of trouble.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>🔄 Spin Speed</strong><br><small>Unit: RPM</small></td>
+                                        <td>How fast the main spinning part (spindle) is turning.</td>
+                                        <td>1,200 – 2,900 RPM</td>
+                                        <td>Spinning too fast or slow compared to normal means the motor or belt might be wearing out.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>💪 Twisting Force (Torque)</strong><br><small>Unit: Newton-meters (Nm)</small></td>
+                                        <td>How hard the machine has to push to cut the material.</td>
+                                        <td>3 – 77 Nm</td>
+                                        <td>A sudden jump in force usually means the tool is stuck or the material is unexpectedly tough.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>⏱️ Tool Usage Counter</strong><br><small>Unit: Minutes</small></td>
+                                        <td>How many minutes the current cutting tool has been actively running.</td>
+                                        <td>0 – 253 mins</td>
+                                        <td>Old tools get dull and can snap. Replacing them on time prevents major breakdowns and damage.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audit Tab -->
+                <div id="tab-audit" class="tab-content hidden">
+                    <div class="card p-4">
+                        <h4>📒 Audit Log</h4>
+                        <button class="btn btn-sm btn-outline-primary mb-3" onclick="loadAuditLog()">Refresh Log</button>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>User</th>
+                                        <th>Equipment</th>
+                                        <th>Result</th>
+                                        <th>Prob (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="audit-tbody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Floating Info Button -->
+<button class="fab-info" onclick="switchTab('info')" title="Equipment Information">ℹ️</button>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

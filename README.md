@@ -30,16 +30,21 @@ Instead of waiting for a machine to break, this system acts as an early warning 
 ```text
 predictive-supply-chain/
 ├── api/
-│   └── main.py                 # The backend server that runs the predictions
+│   ├── main.py                 # Backend API (FastAPI/Flask) for predictions
+│   └── __init__.py             # Python package initialization
 ├── data/
-│   ├── processed/              # Cleaned data ready for the model
-│   └── raw_data.csv            # The original factory dataset
+│   ├── processed/              # Cleaned datasets ready for model input
+│   ├── raw_data.csv            # Original factory dataset
+│   ├── audit_log.csv           # System activity logs
+│   └── tokenized_access_logs.csv # Security/Access data for anomaly detection
 ├── frontend/
-│   └── app.py                  # The web dashboard and login screens
-├── models/
-│   └── xgboost_model.pkl       # The saved machine learning model
+│   └── static/
+│       ├── app.js              # Dashboard logic and API integration
+│       └── index.html          # Web interface for the supply chain dashboard
+├── models/                     # Directory for saved .pkl or .joblib models
 ├── scripts/
-│   ├── 1_eda_and_cleaning.py   # Code used to clean the raw data
-│   └── 2_model_training.py     # Code used to teach the model
-├── requirements.txt            # List of required Python packages
-└── README.md
+│   ├── 1_eda_and_cleaning.py   # Data preprocessing and exploration
+│   └── 2_model_training.py     # Model training and evaluation logic
+├── .gitignore                  # Files to ignore in Git (e.g., venv, __pycache__)
+├── README.md                   # Project documentation
+└── req.txt                     # List of required Python dependencies

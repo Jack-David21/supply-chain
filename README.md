@@ -2,7 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.109.2-009688.svg)
-![XGBoost](https://img.shields.io/badge/XGBoost-2.0.3-red.svg)
+![Random Forest](https://img.shields.io/badge/Random_Forest-scikit--learn-orange.svg)
 
 **A Machine Learning Dashboard for Factory Floor Data**
 
@@ -15,7 +15,7 @@ When factory machines break down unexpectedly, it costs companies a lot of time 
 Instead of waiting for a machine to break, this system acts as an early warning sign. It looks at real-time sensor readings (like how hot the machine is, how fast it is spinning, and how worn the tools are) and uses a Machine Learning model to spot hidden signs of failure.
 
 ### ✨ Key Features
-*   **Smart Predictions:** Uses an XGBoost machine learning model trained on real factory data to predict machine breakdowns.
+*   **Smart Predictions:** Uses a Random Forest machine learning model trained on real factory data to predict machine breakdowns.
 *   **Secure Logins:** Separate accounts for everyday operators and system administrators.
 *   **Easy-to-Use Dashboard:** A web interface where users can enter sensor readings and instantly see if the machine is healthy or at risk.
 *   **Two-Part System:** A secure backend server (FastAPI) handles the heavy math, while the frontend handles the user display.

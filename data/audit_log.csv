@@ -1,3 +1,4 @@
 timestamp,username,role,machine_id,product_quality,room_temp_K,machine_temp_K,spin_speed_rpm,torque_Nm,tool_wear_min,prediction,probability,status
 2026-03-08 18:19:34,operator1,Operator,TEMP-001,1,300.0,310.0,3000,40.0,100,0,0.0018,System Normal
 2026-03-24 20:27:18,admin,Admin,CNC-001,1,300.0,310.0,1500,40.0,100,0,0.001,System Normal
+2026-03-26 18:59:15,admin,Admin,CNC-001,1,300.0,310.0,1500,40.0,100,0,0.0028,System Normal

@@ -20,14 +20,14 @@ from typing import Optional, Dict, Any, List
 # ──────────────────────────────────────────────
 # 1. LOAD THE TRAINED MODEL
 # ──────────────────────────────────────────────
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "xgboost_model.pkl")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "random_forest_model.pkl")
 
 try:
     model = joblib.load(MODEL_PATH)
 except FileNotFoundError:
     raise RuntimeError(
         f"Model file not found at {os.path.abspath(MODEL_PATH)}. "
-        "Run Phase 2 (scripts/2_model_training.py) first to generate xgboost_model.pkl."
+        "Run Phase 2 (scripts/2_model_training.py) first to generate random_forest_model.pkl."
     )
 
 class SensorData(BaseModel):

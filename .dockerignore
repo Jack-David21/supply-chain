@@ -1,0 +1,21 @@
+# Ignore python cache
+__pycache__/
+*.pyc
+*.pyo
+venv/
+env/
+
+# Ignore git folder
+.git/
+
+# Ignore IDE configs
+.vscode/
+.idea/
+
+# Ignore raw/processed datasets to keep the container image lightweight.
+# The data directory will be mounted as a volume instead to persist audit logs.
+data/
+!data/audit_log.csv
+
+# Ignore scripts as they are only used for training and scraping
+scripts/

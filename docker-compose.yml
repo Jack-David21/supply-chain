@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  supply-chain-api:
+    build: .
+    container_name: supply-chain-api
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount the local data directory to persist the audit_log.csv across restarts
+      - ./data:/app/data
+    restart: unless-stopped

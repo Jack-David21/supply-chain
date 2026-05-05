@@ -1,0 +1,23 @@
+timestamp,username,role,machine_id,product_quality,room_temp_K,machine_temp_K,spin_speed_rpm,torque_Nm,tool_wear_min,prediction,probability,status
+2026-03-08 18:19:34,operator1,Operator,TEMP-001,1,300.0,310.0,3000,40.0,100,0,0.0018,System Normal
+2026-03-24 20:27:18,admin,Admin,CNC-001,1,300.0,310.0,1500,40.0,100,0,0.001,System Normal
+2026-03-26 18:59:15,admin,Admin,CNC-001,1,300.0,310.0,1500,40.0,100,0,0.0028,System Normal
+2026-05-05 16:19:58,admin,Admin,CNC-001,1,300.0,310.0,1500,40.0,100,0,0.0028,System Normal
+2026-05-05 16:20:04,admin,Admin,CNC-001,1,300.0,310.0,1500,40.0,100,0,0.0028,System Normal
+2026-05-05 16:20:11,admin,Admin,CNC-001,0,300.0,310.0,1500,40.0,100,0,0.0028,System Normal
+2026-05-05 16:20:18,admin,Admin,CNC-001,0,100.0,310.0,1500,40.0,100,0,0.0107,System Normal
+2026-05-05 16:20:24,admin,Admin,CNC-001,0,10.0,310.0,1500,40.0,100,0,0.0107,System Normal
+2026-05-05 16:20:30,admin,Admin,CNC-001,0,0.0,310.0,1500,40.0,100,0,0.0107,System Normal
+2026-05-05 16:20:35,admin,Admin,CNC-001,0,0.0,310.0,15000,40.0,100,0,0.17,System Normal
+2026-05-05 16:20:42,admin,Admin,CNC-001,0,0.0,310.0,15000,400.0,100,0,0.4296,System Normal
+2026-05-05 16:20:46,admin,Admin,CNC-001,0,0.0,3100.0,15000,400.0,100,0,0.32,System Normal
+2026-05-05 16:20:56,admin,Admin,CNC-001,0,-200.0,3100.0,15000,400.0,100,0,0.32,System Normal
+2026-05-05 16:21:04,admin,Admin,CNC-001,0,-200.0,3100.0,15000,4000.0,100,0,0.32,System Normal
+2026-05-05 16:21:09,admin,Admin,CNC-001,0,-200.0,3100.0,15000,40000.0,100,0,0.32,System Normal
+2026-05-05 16:21:14,admin,Admin,CNC-001,0,0.0,3100.0,15000,40000.0,100,0,0.32,System Normal
+2026-05-05 16:21:18,admin,Admin,CNC-001,0,0.0,310.0,15000,40000.0,100,0,0.4296,System Normal
+2026-05-05 16:21:23,admin,Admin,CNC-001,0,0.0,310.0,15000,40000.0,1000,0,0.3983,System Normal
+2026-05-05 16:21:26,admin,Admin,CNC-001,0,0.0,310.0,15000,40000.0,100000,0,0.3983,System Normal
+2026-05-05 16:21:32,admin,Admin,CNC-001,0,0.0,310.0,15000,400000.0,100000,0,0.3983,System Normal
+2026-05-05 16:21:36,admin,Admin,CNC-001,0,0.0,310.0,150000,400000.0,100000,0,0.3983,System Normal
+2026-05-05 16:21:39,admin,Admin,CNC-001,0,0.0,310.0,150000,400000.0,1000,0,0.3983,System Normal

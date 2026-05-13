@@ -47,7 +47,5 @@ predictive-supply-chain/
 ├── .gitignore                  # Files to ignore in Git (e.g., venv, __pycache__)
 ├── README.md                   # Project documentation
 └── req.txt                     # List of required Python dependencies
-Docker file
 └── Dockerfile
-to ignore in docker
 └── .dockerignore
